@@ -2,14 +2,15 @@ const debug = require("debug")("series:database");
 const chalk = require("chalk");
 const mongoose = require("mongoose");
 
-const initializeDB = (connectionString) => 
+const initializeDB = (connectionString) =>
   new Promise((resolve, reject) => {
     mongoose.set("toJSON", {
       virtuals: true,
       transform: (doc, ret) => {
-
+        // eslint-disable-next-line
         delete ret._id;
 
+        // eslint-disable-next-line
         delete ret.__v;
       },
     });
@@ -27,4 +28,5 @@ const initializeDB = (connectionString) =>
       debug(chalk.green("Connection to database is closed."));
     });
   });
-};
+
+module.exports = initializeDB;

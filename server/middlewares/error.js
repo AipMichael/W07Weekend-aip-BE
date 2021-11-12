@@ -13,7 +13,7 @@ const errorHandler = (error, req, res, next) => {
     error.code = 401;
     error.message = "Oh no! You've made a mistake!";
   }
-  const message = error.code ? error.message : "All broken :(";
+  const message = error.code ? error.message : "BOOM! All broken :(";
   res.status(error.code || 500).json({ error: message });
 };
 
