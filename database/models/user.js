@@ -31,6 +31,7 @@ const userSchema = new Schema({
   bio: {
     type: String,
     required: true,
+    default: "Esto está perfe. ¿Mini de fuet?",
   },
 });
 
