@@ -7,16 +7,16 @@ const loginSchema = {
   }),
 };
 
-const signupSchema = {
+const signUpSchema = {
   body: Joi.object({
     name: Joi.string().required(),
     username: Joi.string().required(),
     password: Joi.string()
       .regex(/[a-zA-Z0-9]{3,30}/)
       .required(),
-    image: Joi.string().required(),
-    bio: Joi.string().required(),
+    image: Joi.string(),
+    bio: Joi.string(),
   }),
 };
 
-module.exports = { loginSchema, signupSchema };
+module.exports = { loginSchema, signUpSchema };

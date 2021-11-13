@@ -15,7 +15,6 @@ const userSchema = new Schema({
   },
   image: {
     type: String,
-    required: true,
     default: "https://i.ibb.co/qDBXYyC/Dise-o-sin-t-tulo-2.png",
   },
   enemies: {
@@ -30,7 +29,6 @@ const userSchema = new Schema({
   },
   bio: {
     type: String,
-    required: true,
     default: "Esto está perfe. ¿Mini de fuet?",
   },
 });

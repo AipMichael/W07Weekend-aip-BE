@@ -8,6 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 const { notFoundErrorHandler, errorHandler } = require("./middlewares/error");
 
 const app = express();
+app.use(morgan("dev"));
 app.use(cors());
 
 const initializeServer = (port) =>
@@ -33,7 +34,6 @@ const initializeServer = (port) =>
     });
   });
 
-app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/users", userRoutes);
