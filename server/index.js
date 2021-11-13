@@ -3,6 +3,9 @@ const chalk = require("chalk");
 const morgan = require("morgan");
 const debug = require("debug")("series:server");
 const cors = require("cors");
+const userRoutes = require("./routes/userRoutes");
+
+const router = express.Router();
 
 const { notFoundErrorHandler, errorHandler } = require("./middlewares/error");
 
@@ -23,7 +26,7 @@ const initializeServer = (port) =>
       }
 
       debug(chalk.red(error.code));
-      reject();
+      /*       reject(); */
     });
 
     server.on("close", () => {
@@ -34,7 +37,7 @@ const initializeServer = (port) =>
 app.use(morgan("dev"));
 app.use(express.json());
 
-/* app.use("/users", userRoutes); */
+app.use("/users", userRoutes);
 
 app.use(notFoundErrorHandler);
 app.use(errorHandler);

@@ -1,12 +1,9 @@
-const express = require("express");
 require("dotenv").config();
 const debug = require("debug")("user:controller");
 const bcrypt = require("bcrypt");
 const chalk = require("chalk");
 const jwt = require("jsonwebtoken");
 const User = require("../../database/models/user");
-
-const router = express.Router();
 
 const userLogin = async (req, res, next) => {
   const { username, password } = req.body;
@@ -55,17 +52,5 @@ const userSignUp = async (req, res, next) => {
     res.json(newUser);
   }
 };
-
-router.get("/", async () => {
-  User.create({
-    name: "aip",
-    username: "aip",
-    enemies: [],
-    friends: [],
-    photo: "https://i.giphy.com/media/1SvnHJFEuEH7hp81tF/giphy.webp",
-    bio: "haciendo la catalana (cosas)",
-    password: await bcrypt.hash("aipAiram", 10),
-  });
-});
 
 module.exports = { userLogin, userSignUp };
