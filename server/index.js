@@ -8,13 +8,14 @@ const userRoutes = require("./routes/userRoutes");
 const { notFoundErrorHandler, errorHandler } = require("./middlewares/error");
 
 const app = express();
+app.use(morgan("dev"));
 app.use(cors());
 
 const initializeServer = (port) =>
   // eslint-disable-next-line no-unused-vars
   new Promise((resolve, reject) => {
     const server = app.listen(port, () => {
-      debug(chalk.green(`connecting to ${port}`));
+      debug(chalk.green(`Connecting to ${port}`));
       resolve(server);
     });
 
@@ -29,11 +30,10 @@ const initializeServer = (port) =>
     });
 
     server.on("close", () => {
-      debug(chalk.blue("See you soon"));
+      debug(chalk.blue("Server closed. See you soon."));
     });
   });
 
-app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/users", userRoutes);
