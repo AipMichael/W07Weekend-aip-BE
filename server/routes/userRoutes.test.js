@@ -2,7 +2,7 @@ require("dotenv").config();
 const debug = require("debug")("user:routes:tests");
 const chalk = require("chalk");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+/* const bcrypt = require("bcrypt"); */
 const supertest = require("supertest");
 const initializeDB = require("../../database");
 const User = require("../../database/models/user");
@@ -21,13 +21,6 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  /*   const myUser = {
-    name: "superHeroina",
-    username: "heroine25",
-    password: "soySuperGuay",
-    image: "https://i.giphy.com/media/cMPdlbcUKl3xkMCyD3/giphy.webp",
-    bio: "i am a heroine and i am the best and most powerful human ever.",
-  }; */
   await User.deleteMany();
   await User.create({
     name: "superHeroina",

@@ -1,11 +1,9 @@
 const express = require("express");
 const chalk = require("chalk");
 const morgan = require("morgan");
-const debug = require("debug")("series:server");
+const debug = require("debug")("users:server");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
-
-const router = express.Router();
 
 const { notFoundErrorHandler, errorHandler } = require("./middlewares/error");
 
