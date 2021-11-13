@@ -13,6 +13,7 @@ const app = express();
 app.use(cors());
 
 const initializeServer = (port) =>
+  // eslint-disable-next-line no-unused-vars
   new Promise((resolve, reject) => {
     const server = app.listen(port, () => {
       debug(chalk.green(`connecting to ${port}`));
