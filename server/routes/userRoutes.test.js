@@ -53,4 +53,71 @@ describe("Given a /users router,", () => {
       expect(body.token).toBeDefined();
     });
   });
+  describe("When it gets a POST request for /users/login with a non existent username", () => {
+    test("Then it should send a response with an error and a status code of 401", async () => {
+      const { body } = await request
+        .post("/users/login")
+        .send({ username: "cualquierCosa", password: "unaMalaPassword" })
+        .expect(401);
+
+      const expectedError = {
+        error: "Pssst! Wrong credentials.",
+      };
+
+      expect(body.token).not.toBeDefined();
+      expect(body).toEqual(expectedError);
+    });
+  });
+
+  describe("When it gets a POST request for /users/register without all the required fields", () => {
+    test("Then it should send a response with an error and a status code of 400", async () => {
+      const { body } = await request
+        .post("/users/register")
+        .send({
+          username: "Descartes",
+          password: "iDontCogito",
+        })
+        .expect(400);
+
+      const expectedError = {
+        error: "Oh no! You've made a mistake!",
+      };
+
+      expect(body).toEqual(expectedError);
+    });
+  });
+
+  describe("When it gets a POST request for /users/register with all the required fields", () => {
+    test("Then it should send a response with the new user and a status code of 200", async () => {
+      const { body } = await request
+        .post("/users/register")
+        .send({
+          username: "userita7",
+          password: "contrasenaLinda",
+          name: "quieroSerUsuaria",
+        })
+        .expect(200);
+
+      expect(body).toHaveProperty("name", "quieroSerUsuaria");
+    });
+  });
+
+  describe("When it gets a POST request for a non existing route", () => {
+    test("Then it should send an error and a status code of 404", async () => {
+      const { body } = await request
+        .post("/users/registerbutwrong")
+        .send({
+          username: "userita7",
+          password: "contrasenaLinda",
+          name: "quieroSerUsuaria",
+        })
+        .expect(404);
+
+      const expectedError = {
+        error: "Sorry, dead end.",
+      };
+
+      expect(body).toEqual(expectedError);
+    });
+  });
 });

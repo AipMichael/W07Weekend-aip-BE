@@ -2,6 +2,13 @@ const { Joi } = require("express-validation");
 
 const loginSchema = {
   body: Joi.object({
+    username: Joi.string().required(),
+    password: Joi.string().required(),
+  }),
+};
+
+const signupSchema = {
+  body: Joi.object({
     name: Joi.string().required(),
     username: Joi.string().required(),
     password: Joi.string()
@@ -12,4 +19,4 @@ const loginSchema = {
   }),
 };
 
-module.exports = { loginSchema };
+module.exports = { loginSchema, signupSchema };
