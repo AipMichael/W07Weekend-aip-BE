@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post("/login", validate(loginSchema), userLogin);
 
-router.get("/", async () => {
+/* router.get("/", async () => {
   User.create({
     name: "aip",
     username: "aip",
@@ -20,6 +20,6 @@ router.get("/", async () => {
     bio: "haciendo la catalana (cosas)",
     password: await bcrypt.hash("aipAiram", 10),
   });
-});
+}); */
 
 module.exports = router;
