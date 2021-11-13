@@ -16,6 +16,7 @@ const userSchema = new Schema({
   image: {
     type: String,
     required: true,
+    default: "https://i.ibb.co/qDBXYyC/Dise-o-sin-t-tulo-2.png",
   },
   enemies: {
     type: [Types.ObjectId],
