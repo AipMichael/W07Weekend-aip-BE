@@ -1,8 +1,9 @@
 const express = require("express");
 const chalk = require("chalk");
 const morgan = require("morgan");
-const debug = require("debug")("series:server");
+const debug = require("debug")("users:server");
 const cors = require("cors");
+const userRoutes = require("./routes/userRoutes");
 
 const { notFoundErrorHandler, errorHandler } = require("./middlewares/error");
 
@@ -10,6 +11,7 @@ const app = express();
 app.use(cors());
 
 const initializeServer = (port) =>
+  // eslint-disable-next-line no-unused-vars
   new Promise((resolve, reject) => {
     const server = app.listen(port, () => {
       debug(chalk.green(`connecting to ${port}`));
@@ -23,7 +25,7 @@ const initializeServer = (port) =>
       }
 
       debug(chalk.red(error.code));
-      reject();
+      /*       reject(); */
     });
 
     server.on("close", () => {
@@ -34,7 +36,7 @@ const initializeServer = (port) =>
 app.use(morgan("dev"));
 app.use(express.json());
 
-/* app.use("/users", userRoutes); */
+app.use("/users", userRoutes);
 
 app.use(notFoundErrorHandler);
 app.use(errorHandler);
