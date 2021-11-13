@@ -8,6 +8,7 @@ const loginSchema = {
       .regex(/[a-zA-Z0-9]{3,30}/)
       .required(),
     image: Joi.string().required(),
+    bio: Joi.string().required(),
   }),
 };
 
