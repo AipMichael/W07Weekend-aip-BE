@@ -1,6 +1,6 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
-/* const jwt = require("jsonwebtoken"); */
+const jwt = require("jsonwebtoken");
 const User = require("../../database/models/user");
 const { userLogin } = require("./userControllers");
 
@@ -59,6 +59,36 @@ describe("Given an userLogin function", () => {
 
       expect(next).toHaveBeenCalledWith(error);
       expect(next.mock.calls[0][0]).toHaveProperty("code", error.code);
+    });
+  });
+  describe("When it receives a request with an correct username and password", () => {
+    test("Then it should invoke res.json with an object with a token", async () => {
+      const req = {
+        body: {
+          username: "tengoHambre",
+          password: "unaBuenaPassword",
+        },
+      };
+      const res = {
+        json: jest.fn(),
+      };
+
+      User.findOne = jest.fn().mockResolvedValue({
+        username: "tengoHambre",
+        password: "unaBuenaPassword",
+      });
+
+      bcrypt.compare = jest.fn().mockResolvedValue(true);
+      const expectedtoken = "tokenSerioYReal";
+      jwt.sign = jest.fn().mockReturnValue(expectedtoken);
+
+      const expectedResponse = {
+        token: expectedtoken,
+      };
+
+      await userLogin(req, res);
+
+      expect(res.json).toHaveBeenCalledWith(expectedResponse);
     });
   });
 });
