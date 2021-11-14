@@ -54,8 +54,39 @@ const userSignUp = async (req, res, next) => {
 };
 
 const getUsers = async (req, res) => {
-  const robots = await User.find();
-  res.json(robots);
+  const currentUser = await User.findOne({ _id: req.userId }).populate([
+    {
+      path: "friends",
+      select: "-password -friends -enemies -name",
+    },
+    {
+      path: "enemies",
+      select: "-password -friends -enemies -name",
+    },
+  ]);
+
+  const friends = currentUser.friends.map((user) => ({
+    username: user.username,
+
+    bio: user.bio,
+
+    id: user.id,
+    friend: true,
+  }));
+
+  const enemies = currentUser.enemies.map((user) => ({
+    username: user.username,
+
+    bio: user.bio,
+    photo: user.photo,
+
+    id: user.id,
+    friend: false,
+  }));
+
+  const users = friends.concat(enemies);
+
+  res.json(users);
 };
 
 module.exports = { userLogin, userSignUp, getUsers };
