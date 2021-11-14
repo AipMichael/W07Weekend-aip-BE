@@ -53,4 +53,9 @@ const userSignUp = async (req, res, next) => {
   }
 };
 
-module.exports = { userLogin, userSignUp };
+const getUsers = async (req, res) => {
+  const robots = await User.find();
+  res.json(robots);
+};
+
+module.exports = { userLogin, userSignUp, getUsers };
