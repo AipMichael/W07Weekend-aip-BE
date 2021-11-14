@@ -57,11 +57,11 @@ const getUsers = async (req, res) => {
   const currentUser = await User.findOne({ _id: req.userId }).populate([
     {
       path: "friends",
-      select: "-password -friends -enemies -username",
+      select: "-password -friends -enemies -name",
     },
     {
       path: "enemies",
-      select: "-password -friends -enemies -username",
+      select: "-password -friends -enemies -name",
     },
   ]);
 
@@ -69,7 +69,6 @@ const getUsers = async (req, res) => {
     username: user.username,
 
     bio: user.bio,
-    image: user.image,
 
     id: user.id,
     friend: true,
@@ -79,7 +78,7 @@ const getUsers = async (req, res) => {
     username: user.username,
 
     bio: user.bio,
-    image: user.image,
+    photo: user.photo,
 
     id: user.id,
     friend: false,

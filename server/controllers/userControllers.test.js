@@ -125,7 +125,7 @@ describe("Given an userSignUp function", () => {
         name: "superHeroina",
         username: "heroine25",
         password: "soySuperGuay",
-        image: "https://i.giphy.com/media/cMPdlbcUKl3xkMCyD3/giphy.webp",
+        photo: "https://i.giphy.com/media/cMPdlbcUKl3xkMCyD3/giphy.webp",
         bio: "i am a heroine and i am the best and most powerful human ever.",
       };
 
@@ -155,7 +155,7 @@ describe("Given a getUsers function", () => {
           name: "superHeroina",
           username: "heroine25",
           password: await bcrypt.hash("soySuperGuay", 10),
-          image: "https://i.giphy.com/media/cMPdlbcUKl3xkMCyD3/giphy.webp",
+          photo: "https://i.giphy.com/media/cMPdlbcUKl3xkMCyD3/giphy.webp",
           bio: "i am a heroine and i am the best and most powerful human ever.",
         },
         {
@@ -163,7 +163,7 @@ describe("Given a getUsers function", () => {
           name: "triangulo",
           username: "trian9",
           password: await bcrypt.hash("soyEquilatera", 10),
-          image: "https://i.giphy.com/media/ZgmpBF4fyqb7O/giphy.webp",
+          photo: "https://i.giphy.com/media/ZgmpBF4fyqb7O/giphy.webp",
           bio: "triangles are my favorite shape",
         },
       ];

@@ -13,18 +13,18 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  image: {
+  photo: {
     type: String,
     default: "https://i.ibb.co/qDBXYyC/Dise-o-sin-t-tulo-2.png",
   },
   enemies: {
     type: [Types.ObjectId],
-    ref: "Users",
+    ref: "User",
     required: true,
   },
   friends: {
     type: [Types.ObjectId],
-    ref: "Users",
+    ref: "User",
     required: true,
   },
   bio: {
