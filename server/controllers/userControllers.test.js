@@ -2,7 +2,7 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../../database/models/user");
-const { userLogin, userSignUp } = require("./userControllers");
+const { userLogin, userSignUp, getUsers } = require("./userControllers");
 
 jest.mock("../../database/models/user");
 jest.mock("bcrypt");
@@ -142,6 +142,47 @@ describe("Given an userSignUp function", () => {
       await userSignUp(req, res);
 
       expect(res.json).toHaveBeenCalledWith(myUser);
+    });
+  });
+});
+
+describe("Given a getUsers function", () => {
+  describe("When it is called with a request", () => {
+    test("Then it should call method json with the list of users", async () => {
+      const myUsers = [
+        {
+          _id: "6191001dd254431e7f1983ec",
+          name: "superHeroina",
+          username: "heroine25",
+          password: await bcrypt.hash("soySuperGuay", 10),
+          image: "https://i.giphy.com/media/cMPdlbcUKl3xkMCyD3/giphy.webp",
+          bio: "i am a heroine and i am the best and most powerful human ever.",
+        },
+        {
+          _id: "6177001dd254431e7f1983ec",
+          name: "triangulo",
+          username: "trian9",
+          password: await bcrypt.hash("soyEquilatera", 10),
+          image: "https://i.giphy.com/media/ZgmpBF4fyqb7O/giphy.webp",
+          bio: "triangles are my favorite shape",
+        },
+      ];
+
+      const req = {
+        userId: 2,
+      };
+
+      const res = {
+        json: jest.fn(),
+      };
+
+      User.findOne = jest.fn().mockReturnValue({
+        populate: jest.fn().mockResolvedValue(myUsers),
+      });
+
+      await getUsers(req, res);
+
+      expect(res.json).toHaveBeenCalledWith(myUsers);
     });
   });
 });
